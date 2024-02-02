@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('User login to AutomationPractice', () => {
-
   test('successful login with valid credentials', async ({ page }) => {
     const url = 'http://www.automationpractice.pl/index.php?';
     const userEmail = 'test@example.com';
@@ -13,8 +12,8 @@ test.describe('User login to AutomationPractice', () => {
     await page.locator('#email').fill(userEmail);
     await page.getByLabel('Password').fill(userPassword);
     await page.getByRole('button', { name: ' Sign in' }).click();
-    
-    await expect(page.locator('.account')).toHaveText(expectedAccountName)
+
+    await expect(page.locator('.account')).toHaveText(expectedAccountName);
   });
 
   test('unsuccessful login with invalid email', async ({ page }) => {
@@ -22,7 +21,7 @@ test.describe('User login to AutomationPractice', () => {
     const userInvalidEmail = 'testexample.com';
     const userPassword = 'Password123!';
     const expectedEmailAlert = 'Invalid email address.';
-    
+
     await page.goto(url);
     await page.getByRole('link', { name: 'Sign in' }).click();
     await page.locator('#email').fill(userInvalidEmail);
@@ -61,6 +60,4 @@ test.describe('User login to AutomationPractice', () => {
 
     await expect(page.getByText(expectedPasswordAlert)).toBeVisible();
   });
-  
-
 });
