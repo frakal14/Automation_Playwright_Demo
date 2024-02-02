@@ -19,7 +19,7 @@ test.describe('User login to AutomationPractice', () => {
   test('unsuccessful login with invalid email', async ({ page }) => {
     const url = 'http://www.automationpractice.pl/index.php?';
     const userInvalidEmail = 'testexample.com';
-    const userPassword = 'Password123!';
+    const userPassword = 'Password123';
     const expectedEmailAlert = 'Invalid email address.';
 
     await page.goto(url);
