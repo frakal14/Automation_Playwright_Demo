@@ -6,5 +6,6 @@ export const loginData = {
     userEmail: 'test@example.com',
     userPassword: 'Password123!',
     userInvalidPassword: 'Password',
-    userShortPassword: 'pass'
+    userShortPassword: 'pass',
+    userInvalidEmail: 'testexample.com',
 }
