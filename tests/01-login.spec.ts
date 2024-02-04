@@ -13,49 +13,42 @@ test.describe('User login to AutomationPractice', () => {
   });
 
   test('successful login with valid credentials', async ({ page }) => {
-    const expectedAccountName = 'Karol test';
     const loginPage = new LoginPage(page);
 
     await loginPage.emailInput.fill(userEmail);
     await loginPage.passwordInput.fill(userPassword);
     await loginPage.signInButton.click();
 
-    await expect(page.locator('.account')).toHaveText(expectedAccountName);
+    await expect(loginPage.accountName).toHaveText(loginPage.expectedAccountName);
   });
 
   test('unsuccessful login with invalid email', async ({ page }) => {
-    const userInvalidEmail = loginData.userInvalidEmail;
-    const expectedEmailAlert = 'Invalid email address.';
     const loginPage = new LoginPage(page);
 
-    await loginPage.emailInput.fill(userInvalidEmail);
+    await loginPage.emailInput.fill(loginData.userInvalidEmail);
     await loginPage.passwordInput.fill(userPassword);
     await loginPage.signInButton.click();
 
-    await expect(page.getByText(expectedEmailAlert)).toBeVisible();
+    await expect(loginPage.invalidEmailAlert).toBeVisible();
   });
 
   test('unsuccessful login with invalid password', async ({ page }) => {
-    const userInvalidPassword = loginData.userInvalidPassword;
-    const expectedPasswordAlert = 'Authentication failed.';
     const loginPage = new LoginPage(page);
 
     await loginPage.emailInput.fill(userEmail);
-    await loginPage.passwordInput.fill(userInvalidPassword);
+    await loginPage.passwordInput.fill(loginData.userInvalidPassword);
     await loginPage.signInButton.click();
 
-    await expect(page.getByText(expectedPasswordAlert)).toBeVisible();
+    await expect(loginPage.invalidPasswordAlert).toBeVisible();
   });
 
   test('unsuccessful login with too short password', async ({ page }) => {
-    const userShortPassword = loginData.userShortPassword;
-    const expectedPasswordAlert = 'Invalid password.';
     const loginPage = new LoginPage(page);
 
     await loginPage.emailInput.fill(userEmail);
-    await loginPage.passwordInput.fill(userShortPassword);
+    await loginPage.passwordInput.fill(loginData.userShortPassword);
     await loginPage.signInButton.click();
 
-    await expect(page.getByText(expectedPasswordAlert)).toBeVisible();
+    await expect(loginPage.invalidShortPasswordAllert).toBeVisible();
   });
 });
