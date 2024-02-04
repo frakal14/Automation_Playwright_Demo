@@ -1,7 +1,10 @@
 import { Page } from "@playwright/test";
+import { HeaderComponent } from "../components/header.components";
 
 export class LoginPage {
   constructor(private page: Page) {}
+
+  header = new HeaderComponent(this.page)
 
   emailInput = this.page.locator('#email')
   passwordInput = this.page.getByLabel('Password')

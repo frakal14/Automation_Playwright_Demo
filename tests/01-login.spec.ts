@@ -8,8 +8,10 @@ test.describe('User login to AutomationPractice', () => {
   const url = 'http://www.automationpractice.pl/';
 
   test.beforeEach(async ({ page }) => {
+    const loginPage = new LoginPage(page);
     await page.goto(url);
-    await page.getByRole('link', { name: 'Sign in' }).click();
+    await loginPage.header.signInButton.click()
+
   });
 
   test('successful login with valid credentials', async ({ page }) => {
