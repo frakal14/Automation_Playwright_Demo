@@ -1,16 +1,19 @@
 import { test, expect } from '@playwright/test';
+import { loginData } from '../test-data/login.data';
 
 test.describe('User login to AutomationPractice', () => {
-  const userEmail = 'test@example.com';
-  const userPassword = 'Password123!';
+  const userEmail = loginData.userEmail;
+  const userPassword = loginData.userPassword;
+  const url = 'http://www.automationpractice.pl/';
 
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://www.automationpractice.pl/');
+    await page.goto(url);
     await page.getByRole('link', { name: 'Sign in' }).click();
   });
 
   test('successful login with valid credentials', async ({ page }) => {
     const expectedAccountName = 'Karol test';
+
     await page.locator('#email').fill(userEmail);
     await page.getByLabel('Password').fill(userPassword);
     await page.getByRole('button', { name: ' Sign in' }).click();
@@ -30,7 +33,7 @@ test.describe('User login to AutomationPractice', () => {
   });
 
   test('unsuccessful login with invalid password', async ({ page }) => {
-    const userInvalidPassword = 'Password';
+    const userInvalidPassword = loginData.userInvalidPassword;
     const expectedPasswordAlert = 'Authentication failed.';
 
     await page.locator('#email').fill(userEmail);
@@ -41,11 +44,11 @@ test.describe('User login to AutomationPractice', () => {
   });
 
   test('unsuccessful login with too short password', async ({ page }) => {
-    const userShordPassword = 'Pass';
+    const userShortPassword = loginData.userShortPassword;
     const expectedPasswordAlert = 'Invalid password.';
 
     await page.locator('#email').fill(userEmail);
-    await page.getByLabel('Password').fill(userShordPassword);
+    await page.getByLabel('Password').fill(userShortPassword);
     await page.getByRole('button', { name: ' Sign in' }).click();
 
     await expect(page.getByText(expectedPasswordAlert)).toBeVisible();
