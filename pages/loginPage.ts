@@ -21,7 +21,7 @@ export class LoginPage {
     await this.header.signInButton.click();
     await this.emailInput.fill(userEmail);
     await this.passwordInput.fill(userPassword);
-    await this.signInButton.click();
+    await this.signInButton.click()
   }
 
   async logout(): Promise<void> {
