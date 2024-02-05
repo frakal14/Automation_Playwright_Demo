@@ -12,6 +12,8 @@
   `npx playwright test --headed`
 - view report  
   `npx playwright show-report`
+- run trace
+  `npx playwright test --trace on`
 
 ## Playwright Config modifications
 
