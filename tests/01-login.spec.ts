@@ -11,7 +11,6 @@ test.describe('User login to AutomationPractice', () => {
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
     await page.goto(url);
-    await loginPage.header.signInButton.click();
   });
 
   test('successful login with valid credentials', async ({ page }) => {
