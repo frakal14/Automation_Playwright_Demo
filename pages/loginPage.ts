@@ -24,4 +24,8 @@ export class LoginPage {
     await this.signInButton.click();
   }
 
+  async logout(): Promise<void> {
+    this.header.signOutButton.click()
+  }
+
 }

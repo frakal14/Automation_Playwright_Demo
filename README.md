@@ -5,7 +5,7 @@
 - new project with Playwright  
   `npm init playwright@latest`
 - record tests for given site  
-  `npx playwright codegen https://demo-bank.vercel.app/`
+  `npx playwright codegen http://www.automationpractice.pl/index.php?`
 - run tests without browser GUI  
   `npx playwright test`
 - run tests with browser GUI  

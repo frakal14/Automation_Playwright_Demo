@@ -39,4 +39,11 @@ test.describe('User login to AutomationPractice', () => {
 
     await expect(loginPage.invalidShortPasswordAllert).toBeVisible();
   });
+
+  test('successful user logout', async ({ page }) => {
+    await loginPage.login(userEmail, userPassword);
+    await loginPage.logout();
+
+    await expect(loginPage.header.signInButton).toBeVisible();
+  });
 });
