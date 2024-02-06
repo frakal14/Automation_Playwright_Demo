@@ -14,6 +14,7 @@ export class RegisterPage {
   createAccountButton = this.page.getByRole('button', {
     name: ' Create an account',
   });
+  invalidEmailAlert = this.page.locator('#create_account_error')
 
   radioButtonMr = this.page.getByLabel('Mr.');
   firstName = this.page.getByLabel('First name *');
@@ -25,6 +26,7 @@ export class RegisterPage {
   dobYears = this.page.locator('#years');
   newsletterCheck = this.page.getByLabel('Sign up for our newsletter!');
   registerButton = this.page.getByRole('button', { name: 'Register ' });
+
   accountCreatedAlert = this.page.getByText('Your account has been created.');
 
   async fillRegisterEmailInput(userEmail: string): Promise<void> {

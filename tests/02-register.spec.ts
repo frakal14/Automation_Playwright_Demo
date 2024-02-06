@@ -6,7 +6,7 @@ import { faker } from '@faker-js/faker';
 test.describe('User register to AutomationPractice', () => {
   let registerPage: RegisterPage;
   const url = 'http://www.automationpractice.pl/';
-  const email = faker.internet.email()
+  const email = faker.internet.email();
 
   test.beforeEach(async ({ page }) => {
     registerPage = new RegisterPage(page);
@@ -20,10 +20,18 @@ test.describe('User register to AutomationPractice', () => {
     await registerPage.fillFirstName(registerData.firstName);
     await registerPage.fillLastName(registerData.lastName);
     expect(registerPage.email).toHaveValue(email);
+
     await registerPage.fillPassword(registerData.password);
     await registerPage.pickDateOfBirth('10', '5', '1990');
     await registerPage.newsletterChecked();
     await registerPage.clickOnRegisterButton();
+
     expect(registerPage.accountCreatedAlert).toBeVisible;
+  });
+
+  test('unsuccessful register with invalid email', async ({ page }) => {
+    await registerPage.fillRegisterEmailInput(registerData.invalidEmail);
+
+    expect(registerPage.invalidEmailAlert).toBeVisible;
   });
 });
