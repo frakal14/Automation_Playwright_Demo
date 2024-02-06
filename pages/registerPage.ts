@@ -14,12 +14,17 @@ export class RegisterPage {
   createAccountButton = this.page.getByRole('button', {
     name: ' Create an account',
   });
-  invalidEmailAlert = this.page.locator('#create_account_error')
 
-  alreadyRegisteredEmailAlertText = 'An account using this email address has already been registered. Please enter a valid password or request a new one. '
+  invalidEmailAlert = this.page.locator('#create_account_error');
+  alreadyRegisteredEmailAlertText =
+    'An account using this email address has already been registered. Please enter a valid password or request a new one. ';
+
+  blankFormAlert = this.page.getByText('There are 3 errors lastname');
+  invalidPasswordAlert = this.page.getByText('passwd is invalid.');
+  
 
   radioButtonMr = this.page.getByLabel('Mr.');
-  firstName = this.page.getByLabel('First name *');
+  firstName = this.page.locator('#customer_firstname');
   lastName = this.page.getByLabel('Last name *');
   email = this.page.locator('#email');
   password = this.page.locator('#passwd');

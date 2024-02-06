@@ -35,10 +35,31 @@ test.describe('User register to AutomationPractice', () => {
     expect(registerPage.invalidEmailAlert).toBeVisible;
   });
 
-  test('unsuccessful register with already registered email', async ({ page }) => {
+  test('unsuccessful register with already registered email', async ({
+    page,
+  }) => {
     await registerPage.fillRegisterEmailInput(registerData.registeredEmail);
     await page.waitForSelector('#create_account_error'),
-    expect(registerPage.invalidEmailAlert).toHaveText(registerPage.alreadyRegisteredEmailAlertText);
+      expect(registerPage.invalidEmailAlert).toHaveText(
+        registerPage.alreadyRegisteredEmailAlertText,
+      );
+  });
+
+  test('unsuccessful register with too short password', async ({ page }) => {
+    await registerPage.fillRegisterEmailInput(registerData.email);
+    await registerPage.fillFirstName(registerData.firstName);
+    await registerPage.fillLastName(registerData.lastName);
+    await registerPage.fillPassword(registerData.shortPassword);
+    await registerPage.clickOnRegisterButton();
+
+    expect(registerPage.invalidPasswordAlert).toBeVisible;
+  });
+
+  test('unsuccessful register with blank form', async ({ page }) => {
+    await registerPage.fillRegisterEmailInput(registerData.email);
+    await registerPage.clickOnRegisterButton();
+
+    expect(registerPage.blankFormAlert).toBeVisible;
   });
 
 
