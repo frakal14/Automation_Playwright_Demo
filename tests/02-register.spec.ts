@@ -34,4 +34,12 @@ test.describe('User register to AutomationPractice', () => {
 
     expect(registerPage.invalidEmailAlert).toBeVisible;
   });
+
+  test('unsuccessful register with already registered email', async ({ page }) => {
+    await registerPage.fillRegisterEmailInput(registerData.registeredEmail);
+    await page.waitForSelector('#create_account_error'),
+    expect(registerPage.invalidEmailAlert).toHaveText(registerPage.alreadyRegisteredEmailAlertText);
+  });
+
+
 });

@@ -16,6 +16,8 @@ export class RegisterPage {
   });
   invalidEmailAlert = this.page.locator('#create_account_error')
 
+  alreadyRegisteredEmailAlertText = 'An account using this email address has already been registered. Please enter a valid password or request a new one. '
+
   radioButtonMr = this.page.getByLabel('Mr.');
   firstName = this.page.getByLabel('First name *');
   lastName = this.page.getByLabel('Last name *');
