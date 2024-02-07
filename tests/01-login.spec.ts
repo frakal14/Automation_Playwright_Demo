@@ -12,7 +12,6 @@ test.describe('User login to AutomationPractice', () => {
     loginPage = new LoginPage(page);
     loadHomePage(page);
     clearCookies(context)
-    //await context.clearCookies()
   });
 
   test('successful login with valid credentials', async ({ page }) => {
