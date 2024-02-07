@@ -1,27 +1,31 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/loginPage';
+import { CheckoutPage } from '../pages/checkoutPage';
 import { loginData } from '../test-data/login.data';
 import { loadHomePage, addSingleProductToCart } from '../helpers';
 
 test.describe('User checkout on AutomationPractice', () => {
   let loginPage: LoginPage;
+  let checkoutPage: CheckoutPage;
 
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
-    loadHomePage(page)
+    checkoutPage = new CheckoutPage(page);
+    loadHomePage(page);
     await loginPage.login(loginData.userEmail, loginData.userPassword);
   });
 
-  test('successful checkout while logged and address already saved', async ({ page }) => {
-    addSingleProductToCart(page)
-    
-    await page.getByRole('link', { name: 'Proceed to checkout ' }).click();
-    await page.getByRole('link', { name: 'Proceed to checkout ' }).click();
-    await page.getByRole('button', { name: 'Proceed to checkout ' }).click();
-    await page.getByLabel('I agree to the terms of').check();
-    await page.getByRole('button', { name: 'Proceed to checkout ' }).click();
-    await page.getByRole('link', { name: 'Pay by check (order' }).click();
-    await page.getByRole('button', { name: 'I confirm my order ' }).click();
-    await page.getByText('Your order on My Shop is').click();
+  test('successful checkout while logged and address already saved', async ({
+    page,
+  }) => {
+    addSingleProductToCart(page);
+    await checkoutPage.clickOnCartCheckoutButton();
+    await checkoutPage.clickOnAddressCheckoutButton();
+    await checkoutPage.checkTermsOfService();
+    await checkoutPage.clickOnShippingCheckoutButton();
+    await checkoutPage.clickOnPayByCheck();
+    await checkoutPage.clickOnConfirmOrderButton();
+
+    await expect(checkoutPage.orderConfirmAlert).toBeVisible();
   });
 });

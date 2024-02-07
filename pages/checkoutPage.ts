@@ -10,13 +10,9 @@ export class CheckoutPage {
   cartCheckoutButton = this.page.getByRole('link', {
     name: 'Proceed to checkout ',
   });
-  addressCheckoutButton = this.page.getByRole('link', {
-    name: 'Proceed to checkout ',
-  });
+
   termsOfServiceCheckBox = this.page.getByLabel('I agree to the terms of');
-  shippingCheckoutButton = this.page.getByRole('link', {
-    name: 'Proceed to checkout ',
-  });
+
   payByCheck = this.page.getByRole('link', { name: 'Pay by check (order' });
   confirmOrderButton = this.page.getByRole('button', {
     name: 'I confirm my order ',
@@ -29,19 +25,25 @@ export class CheckoutPage {
   }
 
   async clickOnCartCheckoutButton(): Promise<void> {
-    await this.modalCheckoutButton.click();
+    await this.cartCheckoutButton.click();
   }
 
   async clickOnAddressCheckoutButton(): Promise<void> {
-    await this.modalCheckoutButton.click();
+    const addressCheckoutButton = `[name='processAddress']`;
+    await this.page.click(addressCheckoutButton);
   }
 
   async clickOnShippingCheckoutButton(): Promise<void> {
-    await this.modalCheckoutButton.click();
+    const shippingCheckoutButton = `[name='processCarrier']`;
+    await this.page.click(shippingCheckoutButton);
   }
 
   async checkTermsOfService(): Promise<void> {
     await this.termsOfServiceCheckBox.check();
+  }
+
+  async clickOnPayByCheck(): Promise<void> {
+    await this.payByCheck.click();
   }
 
   async clickOnConfirmOrderButton(): Promise<void> {
