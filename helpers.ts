@@ -11,8 +11,8 @@ export async function addSingleProductToCart(page) {
       await page.locator('#color_2').click();
       await page.getByLabel('Size').selectOption('2');
       await page.getByRole('button', { name: ' Add to cart' }).click();
+      await page.page.getByRole('link', {name: 'Proceed to checkout '}).click()
 }
-
 
 
 
