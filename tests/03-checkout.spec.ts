@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 import { LoginPage } from '../pages/loginPage';
 import { loginData } from '../test-data/login.data';
-import { loadHomePage } from '../helpers';
+import { loadHomePage, addSingleProductToCart } from '../helpers';
 
 test.describe('User checkout on AutomationPractice', () => {
   let loginPage: LoginPage;
@@ -13,12 +13,8 @@ test.describe('User checkout on AutomationPractice', () => {
   });
 
   test('successful login with valid credentials', async ({ page }) => {
-    await page.goto(
-      'http://www.automationpractice.pl/index.php?id_category=3&controller=category',
-    );
-    await page.locator('#color_2').click();
-    await page.getByLabel('Size').selectOption('2');
-    await page.getByRole('button', { name: ' Add to cart' }).click();
+    addSingleProductToCart(page)
+    
     await page.getByRole('link', { name: 'Proceed to checkout ' }).click();
     await page.getByRole('link', { name: 'Proceed to checkout ' }).click();
     await page.getByRole('button', { name: 'Proceed to checkout ' }).click();
