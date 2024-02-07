@@ -14,3 +14,7 @@ export async function addSingleProductToCart(page) {
   await page.getByRole('button', { name: ' Add to cart' }).click();
   await page.getByRole('link', { name: 'Proceed to checkout ' }).click();
 }
+
+export async function clearCookies(context) {
+  await context.clearCookies()
+}
