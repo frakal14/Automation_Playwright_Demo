@@ -2,15 +2,15 @@ import { test, expect } from '@playwright/test';
 import { registerData } from '../test-data/register.data';
 import { RegisterPage } from '../pages/registerPage';
 import { faker } from '@faker-js/faker';
+import { loadHomePage } from '../helpers';
 
 test.describe('User register to AutomationPractice', () => {
   let registerPage: RegisterPage;
-  const url = 'http://www.automationpractice.pl/';
   const email = faker.internet.email();
 
   test.beforeEach(async ({ page }) => {
     registerPage = new RegisterPage(page);
-    await page.goto(url);
+    loadHomePage(page);
     await registerPage.header.signInButton.click();
   });
 
@@ -61,6 +61,4 @@ test.describe('User register to AutomationPractice', () => {
 
     expect(registerPage.blankFormAlert).toBeVisible;
   });
-
-
 });

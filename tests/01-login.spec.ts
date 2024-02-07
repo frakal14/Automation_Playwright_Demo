@@ -1,16 +1,16 @@
 import { test, expect } from '@playwright/test';
 import { loginData } from '../test-data/login.data';
 import { LoginPage } from '../pages/loginPage';
+import { loadHomePage } from '../helpers';
 
 test.describe('User login to AutomationPractice', () => {
   let loginPage: LoginPage;
   const userEmail = loginData.userEmail;
   const userPassword = loginData.userPassword;
-  const url = 'http://www.automationpractice.pl/';
 
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
-    await page.goto(url);
+    loadHomePage(page);
   });
 
   test('successful login with valid credentials', async ({ page }) => {
