@@ -1,16 +1,18 @@
 import { test, expect } from '@playwright/test';
 import { loginData } from '../test-data/login.data';
 import { LoginPage } from '../pages/loginPage';
-import { loadHomePage } from '../helpers';
+import { loadHomePage, clearCookies } from '../helpers';
 
 test.describe('User login to AutomationPractice', () => {
   let loginPage: LoginPage;
   const userEmail = loginData.userEmail;
   const userPassword = loginData.userPassword;
 
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, context }) => {
     loginPage = new LoginPage(page);
     loadHomePage(page);
+    clearCookies(context)
+    //await context.clearCookies()
   });
 
   test('successful login with valid credentials', async ({ page }) => {
