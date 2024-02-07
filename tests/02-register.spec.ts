@@ -2,15 +2,16 @@ import { test, expect } from '@playwright/test';
 import { registerData } from '../test-data/register.data';
 import { RegisterPage } from '../pages/registerPage';
 import { faker } from '@faker-js/faker';
-import { loadHomePage } from '../helpers';
+import { loadHomePage, clearCookies } from '../helpers';
 
 test.describe('User register to AutomationPractice', () => {
   let registerPage: RegisterPage;
   const email = faker.internet.email();
 
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, context }) => {
     registerPage = new RegisterPage(page);
     loadHomePage(page);
+    clearCookies(context)
     await registerPage.header.signInButton.click();
   });
 
