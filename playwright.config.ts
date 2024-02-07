@@ -24,11 +24,11 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-     baseURL: 'http://www.automationpractice.pl/',
+    baseURL: 'http://www.automationpractice.pl/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'retain-on-failure',
-    video: 'retain-on-failure',
+    trace: 'on-first-retry',
+    storageState: './auth.json',
   },
 
   /* Configure projects for major browsers */
