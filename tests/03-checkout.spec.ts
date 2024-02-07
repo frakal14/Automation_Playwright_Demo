@@ -12,7 +12,7 @@ test.describe('User checkout on AutomationPractice', () => {
     await loginPage.login(loginData.userEmail, loginData.userPassword);
   });
 
-  test('successful login with valid credentials', async ({ page }) => {
+  test('successful checkout while logged and address already saved', async ({ page }) => {
     addSingleProductToCart(page)
     
     await page.getByRole('link', { name: 'Proceed to checkout ' }).click();
